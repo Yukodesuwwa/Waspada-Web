@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'supabase'),
 
     /*
     |--------------------------------------------------------------------------
@@ -63,20 +63,20 @@ return [
             ]) : [],
         ],
 
-        'pgsql' => [
-            'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'prefer',
-        ],
+            // 'pgsql' => [
+            //     'driver' => 'pgsql',
+            //     'url' => env('DATABASE_URL'),
+            //     'host' => env('DB_HOST', '127.0.0.1'),
+            //     'port' => env('DB_PORT', '5432'),
+            //     'database' => env('DB_DATABASE', 'forge'),
+            //     'username' => env('DB_USERNAME', 'forge'),
+            //     'password' => env('DB_PASSWORD', ''),
+            //     'charset' => 'utf8',
+            //     'prefix' => '',
+            //     'prefix_indexes' => true,
+            //     'search_path' => 'public',
+            //     'sslmode' => 'prefer',
+            // ],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
@@ -92,7 +92,20 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
-
+        'supabase' => [
+            'driver' => 'pgsql',
+            'url' => env('SUPABASE_URL'),
+            'host' => parse_url(env('SUPABASE_URL'), PHP_URL_HOST),
+            'port' => parse_url(env('SUPABASE_URL'), PHP_URL_PORT),
+            'database' => parse_url(env('SUPABASE_URL'), PHP_URL_PATH),
+            'username' => null,
+            'password' => env('SUPABASE_KEY'),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'schema' => 'public',
+            'sslmode' => 'prefer',
+        ],
     ],
 
     /*
